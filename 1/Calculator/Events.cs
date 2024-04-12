@@ -2,12 +2,12 @@
 using System.Drawing;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace Calculator
 {
     public partial class MainForm : Form
     {
+        /*
         public void textBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (sender is TextBox textBox)
@@ -17,6 +17,29 @@ namespace Calculator
                     e.Handled = true;
                     MessageBox.Show("Только положительные числа!");
                 }
+                else
+                {
+                    if (e.KeyChar == '.') e.KeyChar = ',';
+                    if (e.KeyChar != 13 && e.KeyChar != 44 && e.KeyChar != 8 && (e.KeyChar < 48 || e.KeyChar > 57))
+                    {
+                        e.Handled = true;
+                        MessageBox.Show("Только цифpы!");
+                    }
+                    if (e.KeyChar == 13)
+                    {
+                        if (textBox.Text.Length > 0 && textBox.Text != "-") SendKeys.Send("{TAB}");
+                        else MessageBox.Show("Bведите число");
+                    }
+                }
+            }
+        }
+        */
+
+        public void textBoxScale_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (sender is TextBox textBox)
+            {
+                if (e.KeyChar == 45 && textBox.SelectionStart == 0) {; }
                 else
                 {
                     if (e.KeyChar == '.') e.KeyChar = ',';
@@ -45,7 +68,7 @@ namespace Calculator
             {
                 try
                 {
-                    if (textBox.Text.Length != 0 && textBox.Text != "-")
+                    if (textBox.Text.Length != 0 && textBox.Text != "-" && textBox.Text != "," && textBox.Text != "-,")
                     {
                         _scale[textBox] = Convert.ToDouble(textBox.Text);
 
@@ -75,11 +98,12 @@ namespace Calculator
                 _length = Convert.ToDouble(tBLength.Text);
                 _step = Convert.ToDouble(tBStep.Text);
 
+                /*
                 for (int i = 0; i < _listTextBox.Count; i++) { _listTextBox[i].Enabled = false; }
-
                 groupBox2.Enabled = true;
                 btnConfirm.Visible = false;
                 btnClear.Visible = true;
+                */
             }
             catch (Exception ex)
             {
@@ -97,16 +121,44 @@ namespace Calculator
                 _listTextBox[i].Text = string.Empty;
                 _listTextBox[i].Enabled = true;
             }
+            /*
             groupBox2.Enabled = false;
             btnBuildGraph.Enabled = true;
             btnConfirm.Visible = true;
             btnClear.Visible = false;
+            */
         }
 
         private void btnBuildGraph_Click(object sender, EventArgs e)
         {
-            btnBuildGraph.Enabled = false;
-            BuildGraph();
+            //btnBuildGraph.Enabled = false;
+
+            chart.Series.Clear();
+            chart1.Series.Clear();
+
+            _graphTOmega.Points.Clear();
+            _graphTPhi.Points.Clear();
+            _graphPhiOmega.Points.Clear();
+
+            chart.ChartAreas[0].AxisX.Minimum = _scale[textBoxXMin];
+            chart.ChartAreas[0].AxisX.Maximum = _scale[textBoxXMax];
+            chart.ChartAreas[0].AxisY.Minimum = _scale[textBoxYMin];
+            chart.ChartAreas[0].AxisY.Maximum = _scale[textBoxYMax];
+
+            double phi = 0, omega = _velocity / Math.Sqrt(9.8 * _length);
+            for (double t = 0; t <= 20; t += _step)
+            {
+                _graphPhiOmega.Points.AddXY(phi, omega);
+
+                _graphTOmega.Points.AddXY(t, omega);
+                _graphTPhi.Points.AddXY(t, phi);
+                omega -= _step * Math.Sin(phi);
+                phi += _step * omega;
+            }
+            chart.Series.Add(_graphTOmega);
+            chart.Series.Add(_graphTPhi);
+            chart1.Series.Add(_graphPhiOmega);
+            chart.Legends.Clear();
         }
 
         private void btnScale_Click(object sender, EventArgs e)
@@ -146,8 +198,10 @@ namespace Calculator
         private void MainForm_SizeChanged(object sender, EventArgs e)
         {
             btnConfirm.Location = new Point(groupBox1.Width/2 - btnConfirm.Width/2, 113);
-            btnClear.Location = new Point(groupBox1.Width/2 - btnClear.Width/2, 113);
+            //btnClear.Location = new Point(groupBox1.Width/4 - btnClear.Width/2, 113);
             btnBuildGraph.Location = new Point(groupBox2.Width/2 - btnBuildGraph.Width/2, 18);
+            panelTB.Location = new Point(groupBox1.Width/2 - panelTB.Width/2, 21);
+            panelGr.Location = new Point(groupBox2.Width/2 - panelGr.Width/2, 55);
 
             groupBox1.Height = Height * 25/100;
             groupBox2.Height = Height * 70/100;

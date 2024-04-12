@@ -67,5 +67,22 @@ namespace Calculator
             chart.ChartAreas[0].AxisX.Crossing = 0;
             chart.ChartAreas[0].AxisY.Crossing = 0;
         }
+
+        private bool Verify()
+        {
+            try
+            {
+                for (int i = 0; i < _listTextBox.Count; i++)
+                {
+                    if (_listTextBox[i].Text.Length == 0) return false;
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}");
+            }
+            return false;
+        }
     }
 }
