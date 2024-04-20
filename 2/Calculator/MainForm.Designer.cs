@@ -60,7 +60,6 @@ namespace Calculator
             this.label2 = new System.Windows.Forms.Label();
             this.tBStep = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnConfirm = new System.Windows.Forms.Button();
             this.labelCoeff0 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -97,7 +96,7 @@ namespace Calculator
             this.buttonG.Name = "buttonG";
             this.buttonG.Size = new System.Drawing.Size(237, 30);
             this.buttonG.TabIndex = 13;
-            this.buttonG.Text = "Найти наибольший угол";
+            this.buttonG.Text = "Найти наилучший угол";
             this.buttonG.UseVisualStyleBackColor = false;
             this.buttonG.Click += new System.EventHandler(this.buttonG_Click);
             // 
@@ -217,7 +216,6 @@ namespace Calculator
             this.groupBox1.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.panelTB);
-            this.groupBox1.Controls.Add(this.btnConfirm);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
@@ -245,9 +243,9 @@ namespace Calculator
             this.panel1.Controls.Add(this.textBoxL);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.textBoxH);
-            this.panel1.Location = new System.Drawing.Point(6, 39);
+            this.panel1.Location = new System.Drawing.Point(6, 33);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(213, 93);
+            this.panel1.Size = new System.Drawing.Size(213, 85);
             this.panel1.TabIndex = 12;
             // 
             // label6
@@ -321,7 +319,7 @@ namespace Calculator
             this.panelTB.Controls.Add(this.label2);
             this.panelTB.Controls.Add(this.tBStep);
             this.panelTB.Controls.Add(this.label1);
-            this.panelTB.Location = new System.Drawing.Point(13, 21);
+            this.panelTB.Location = new System.Drawing.Point(13, 33);
             this.panelTB.Name = "panelTB";
             this.panelTB.Size = new System.Drawing.Size(234, 85);
             this.panelTB.TabIndex = 0;
@@ -333,7 +331,6 @@ namespace Calculator
             this.tBVelocity.Name = "tBVelocity";
             this.tBVelocity.Size = new System.Drawing.Size(132, 23);
             this.tBVelocity.TabIndex = 1;
-            this.tBVelocity.TextChanged += new System.EventHandler(this.textBox_TextChanged);
             this.tBVelocity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             // 
             // label3
@@ -354,7 +351,6 @@ namespace Calculator
             this.tBLength.Name = "tBLength";
             this.tBLength.Size = new System.Drawing.Size(132, 23);
             this.tBLength.TabIndex = 2;
-            this.tBLength.TextChanged += new System.EventHandler(this.textBox_TextChanged);
             this.tBLength.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             // 
             // label2
@@ -375,7 +371,6 @@ namespace Calculator
             this.tBStep.Name = "tBStep";
             this.tBStep.Size = new System.Drawing.Size(132, 23);
             this.tBStep.TabIndex = 3;
-            this.tBStep.TextChanged += new System.EventHandler(this.textBox_TextChanged);
             this.tBStep.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             // 
             // label1
@@ -388,21 +383,6 @@ namespace Calculator
             this.label1.Size = new System.Drawing.Size(85, 20);
             this.label1.TabIndex = 6;
             this.label1.Text = "Скорость:";
-            // 
-            // btnConfirm
-            // 
-            this.btnConfirm.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.btnConfirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnConfirm.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnConfirm.Location = new System.Drawing.Point(13, 112);
-            this.btnConfirm.Margin = new System.Windows.Forms.Padding(4);
-            this.btnConfirm.Name = "btnConfirm";
-            this.btnConfirm.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnConfirm.Size = new System.Drawing.Size(134, 30);
-            this.btnConfirm.TabIndex = 1;
-            this.btnConfirm.Text = "Подтвердить";
-            this.btnConfirm.UseVisualStyleBackColor = false;
-            this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
             // 
             // labelCoeff0
             // 
@@ -451,7 +431,6 @@ namespace Calculator
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button btnConfirm;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart;
         private System.Windows.Forms.Label labelCoeff0;
         private System.Windows.Forms.ToolTip toolTip1;

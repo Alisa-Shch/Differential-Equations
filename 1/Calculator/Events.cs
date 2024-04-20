@@ -57,10 +57,12 @@ namespace Calculator
             }
         }
 
+        /*
         private void textBox_TextChanged(object sender, EventArgs e)
         {
             if (Verify()) btnConfirm.Visible = true;
         }
+        */
 
         private void textBoxScale_TextChanged(object sender, EventArgs e)
         {
@@ -111,6 +113,7 @@ namespace Calculator
             }
         }
 
+        /*
         private void btnClear_Click(object sender, EventArgs e)
         {
             _graphPhiOmega.Points.Clear();
@@ -127,11 +130,14 @@ namespace Calculator
             btnConfirm.Visible = true;
             btnClear.Visible = false;
             */
-        }
+        //}        
 
         private void btnBuildGraph_Click(object sender, EventArgs e)
         {
             //btnBuildGraph.Enabled = false;
+
+            btnConfirm_Click(sender, e);
+            btnScale_Click(sender, e);
 
             chart.Series.Clear();
             chart1.Series.Clear();
@@ -197,14 +203,14 @@ namespace Calculator
 
         private void MainForm_SizeChanged(object sender, EventArgs e)
         {
-            btnConfirm.Location = new Point(groupBox1.Width/2 - btnConfirm.Width/2, 113);
+            //btnConfirm.Location = new Point(groupBox1.Width/2 - btnConfirm.Width/2, 113);
             //btnClear.Location = new Point(groupBox1.Width/4 - btnClear.Width/2, 113);
             btnBuildGraph.Location = new Point(groupBox2.Width/2 - btnBuildGraph.Width/2, 18);
             panelTB.Location = new Point(groupBox1.Width/2 - panelTB.Width/2, 21);
             panelGr.Location = new Point(groupBox2.Width/2 - panelGr.Width/2, 55);
 
-            groupBox1.Height = Height * 25/100;
-            groupBox2.Height = Height * 70/100;
+            //groupBox1.Height = Height * 25/100;
+            //groupBox2.Height = Height * 70/100;
         }
     }
 }

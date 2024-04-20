@@ -53,6 +53,7 @@ namespace Calculator
             _graphPhiOmega.ChartType = SeriesChartType.Spline;
             _graphPhiOmega.Color = Color.SlateBlue;
             _graphPhiOmega.BorderWidth = 2;
+
             chart1.ChartAreas[0].AxisX.Crossing = 0;
             chart1.ChartAreas[0].AxisY.Crossing = 0;
 
@@ -62,12 +63,14 @@ namespace Calculator
             _graphTPhi.ChartType = SeriesChartType.Spline;
             _graphTPhi.Color = Color.MediumAquamarine;
             _graphTPhi.BorderWidth = 2;
+
             chart.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.Black;
             chart.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.Black;
             chart.ChartAreas[0].AxisX.Crossing = 0;
             chart.ChartAreas[0].AxisY.Crossing = 0;
         }
 
+        /*
         private bool Verify()
         {
             try
@@ -84,5 +87,6 @@ namespace Calculator
             }
             return false;
         }
+        */
     }
 }

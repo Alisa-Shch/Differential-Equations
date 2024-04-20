@@ -23,7 +23,9 @@ namespace Calculator
 
         double _velocity;        
         double _angle;
-        double _step;        
+        double _step;
+        double _mass;
+        double _friction;
 
         private double _XMin = 0;
         private double _XMax = 11;
