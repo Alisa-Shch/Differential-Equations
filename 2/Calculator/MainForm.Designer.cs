@@ -121,7 +121,6 @@ namespace Calculator
             this.textBoxXMin.Size = new System.Drawing.Size(43, 23);
             this.textBoxXMin.TabIndex = 4;
             this.textBoxXMin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBoxXMin.Click += new System.EventHandler(this.textBoxScale_Click);
             this.textBoxXMin.TextChanged += new System.EventHandler(this.textBoxScale_TextChanged);
             this.textBoxXMin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             // 
@@ -134,7 +133,6 @@ namespace Calculator
             this.textBoxYMax.Size = new System.Drawing.Size(43, 23);
             this.textBoxYMax.TabIndex = 7;
             this.textBoxYMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBoxYMax.Click += new System.EventHandler(this.textBoxScale_Click);
             this.textBoxYMax.TextChanged += new System.EventHandler(this.textBoxScale_TextChanged);
             this.textBoxYMax.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             // 
@@ -147,7 +145,6 @@ namespace Calculator
             this.textBoxXMax.Size = new System.Drawing.Size(43, 23);
             this.textBoxXMax.TabIndex = 5;
             this.textBoxXMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBoxXMax.Click += new System.EventHandler(this.textBoxScale_Click);
             this.textBoxXMax.TextChanged += new System.EventHandler(this.textBoxScale_TextChanged);
             this.textBoxXMax.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             // 
@@ -160,7 +157,6 @@ namespace Calculator
             this.textBoxYMin.Size = new System.Drawing.Size(43, 23);
             this.textBoxYMin.TabIndex = 6;
             this.textBoxYMin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBoxYMin.Click += new System.EventHandler(this.textBoxScale_Click);
             this.textBoxYMin.TextChanged += new System.EventHandler(this.textBoxScale_TextChanged);
             this.textBoxYMin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             // 

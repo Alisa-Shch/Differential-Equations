@@ -74,10 +74,13 @@ namespace Calculator
                     {
                         _scale[textBox] = Convert.ToDouble(textBox.Text);
 
-                        chart.ChartAreas[0].AxisX.Minimum = _scale[textBoxXMin];
-                        chart.ChartAreas[0].AxisX.Maximum = _scale[textBoxXMax];
-                        chart.ChartAreas[0].AxisY.Minimum = _scale[textBoxYMin];
-                        chart.ChartAreas[0].AxisY.Maximum = _scale[textBoxYMax];
+                        if (_scale[textBoxXMin] < _scale[textBoxXMax] && _scale[textBoxYMin] < _scale[textBoxYMax])
+                        {
+                            chart.ChartAreas[0].AxisX.Minimum = _scale[textBoxXMin];
+                            chart.ChartAreas[0].AxisX.Maximum = _scale[textBoxXMax];
+                            chart.ChartAreas[0].AxisY.Minimum = _scale[textBoxYMin];
+                            chart.ChartAreas[0].AxisY.Maximum = _scale[textBoxYMax];
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -87,10 +90,12 @@ namespace Calculator
             }
         }
 
+        /*
         private void textBoxScale_Click(object sender, EventArgs e)
         {
             if (sender is TextBox textBox) textBox.SelectAll(); 
         }
+        */
 
         private void btnConfirm_Click(object sender, EventArgs e)
         {
@@ -169,6 +174,7 @@ namespace Calculator
 
         private void btnScale_Click(object sender, EventArgs e)
         {
+            /*
             _scale[textBoxXMin] = _XMin;
             _scale[textBoxXMax] = _XMax;
             _scale[textBoxYMin] = _YMin;
@@ -183,6 +189,7 @@ namespace Calculator
             chart.ChartAreas[0].AxisX.Maximum = _scale[textBoxXMax];
             chart.ChartAreas[0].AxisY.Minimum = _scale[textBoxYMin];
             chart.ChartAreas[0].AxisY.Maximum = _scale[textBoxYMax];
+            */
 
             chart.Visible = false;
             chart.ChartAreas[0].AxisY.ScaleView.ZoomReset(10);

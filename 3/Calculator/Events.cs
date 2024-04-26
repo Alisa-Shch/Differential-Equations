@@ -41,10 +41,13 @@ namespace Calculator
                     {
                         _scale[textBox] = Convert.ToDouble(textBox.Text);
 
-                        chart.ChartAreas[0].AxisX.Minimum = _scale[textBoxXMin];
-                        chart.ChartAreas[0].AxisX.Maximum = _scale[textBoxXMax];
-                        chart.ChartAreas[0].AxisY.Minimum = _scale[textBoxYMin];
-                        chart.ChartAreas[0].AxisY.Maximum = _scale[textBoxYMax];
+                        if (_scale[textBoxXMin] < _scale[textBoxXMax] && _scale[textBoxYMin] < _scale[textBoxYMax])
+                        {
+                            chart.ChartAreas[0].AxisX.Minimum = _scale[textBoxXMin];
+                            chart.ChartAreas[0].AxisX.Maximum = _scale[textBoxXMax];
+                            chart.ChartAreas[0].AxisY.Minimum = _scale[textBoxYMin];
+                            chart.ChartAreas[0].AxisY.Maximum = _scale[textBoxYMax];
+                        }
                     }
                 }
                 catch (Exception ex)
