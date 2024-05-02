@@ -8,7 +8,7 @@ namespace Calculator
     {
         public void textBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (sender is System.Windows.Forms.TextBox textBox)
+            if (sender is TextBox textBox)
             {
                 if (e.KeyChar == 45 && textBox.SelectionStart == 0) {; }
                 else
@@ -30,7 +30,7 @@ namespace Calculator
 
         private void textBoxScale_TextChanged(object sender, EventArgs e)
         {
-            if (sender is System.Windows.Forms.TextBox textBox)
+            if (sender is TextBox textBox)
             {
                 try
                 {
@@ -58,7 +58,8 @@ namespace Calculator
         {
             try
             {
-                _to = Convert.ToDouble(tBOpeningTime.Text);
+                _angle = Convert.ToDouble(tBAngle.Text);
+                _angle *= Math.PI / 180;
                 _step = Convert.ToDouble(tBStep.Text);
             }
             catch (Exception ex)
@@ -82,41 +83,114 @@ namespace Calculator
 
             _graph.Points.Clear();
             _graph2.Points.Clear();
-            _graph3.Points.Clear();
 
-            double h = 3000, m = 80, a0 = 0.3, a1 = 60, Cd = 0.95, p = 1.2,
-                t, T = 1, t1 = T + _to, Vy = 0, g = 9.8, y = h, a,
-                k, k0 = 0.5 * p * Cd * a0, k1 = 0.5 * p * Cd * a1;
-                        
-            for (t = 0; y >= 0; t += _step)
+            double m = 104, D = 0.2, v0 = 1800, p, p0 = 1.2, Cd = 0.2, g = 9.81,
+                A = Math.PI*Math.Pow(D, 2)/4, k = 0.5*p0*Cd*A, 
+                x, y, vx = v0 * Math.Cos(_angle), vy = v0 * Math.Sin(_angle), vxy;                        
+            for (x = 0, y = 0; y >= 0;)
             {
-                _graph.Points.AddXY(t, y/30);
-                _graph3.Points.AddXY(t, -Vy);
-
-                if (t <= _to) { k = k0; }
-                else if (_to < t && t <= t1) { k = k0 + (k1 - k0) / T * (t - _to); }
-                else { k = k1; }
-
-                a = -g + k * Math.Pow(Vy, 2) / m;
-                Vy += a * _step;
-                y += Vy * _step;
-
-                _graph2.Points.AddXY(t, -a);
+                _graph.Points.AddXY(x/1000, y/500);
+                vxy = -k * Math.Sqrt(Math.Pow(vx, 2) + Math.Pow(vy, 2)) / m;
+                vx += vxy*vx * _step;
+                vy += (-g + vxy*vy) * _step;
+                x += vx * _step;
+                y += vy * _step;
             }
+            label2.Text = Math.Round(x/1000, 2).ToString();
 
-
-            chart.Series.Add(_graph);
-            chart.Legends.Add("1");
-            chart.Series[0].LegendText = "h";
+            vx = v0 * Math.Cos(_angle);
+            vy = v0 * Math.Sin(_angle);
+            for (x = 0, y = 0; y >= 0;)
+            {
+                p = p0 * Math.Exp(-y/80000);
+                k = 0.5 * p * Cd * A;
+                _graph2.Points.AddXY(x/1000, y/500);
+                vxy = -k * Math.Sqrt(Math.Pow(vx, 2) + Math.Pow(vy, 2)) / m;
+                vx += vxy * vx * _step;
+                vy += (-g + vxy * vy) * _step;
+                x += vx * _step;
+                y += vy * _step;
+            }
+            label4.Text = Math.Round(x/1000, 2).ToString();          
 
             chart.Series.Add(_graph2);
-            chart.Legends.Add("2");
-            chart.Series[1].LegendText = "a";
+            chart.Legends.Add("1");
+            chart.Series[0].LegendText = "с изменением p";
 
-            chart.Series.Add(_graph3);
-            chart.Legends.Add("3");
-            chart.Series[2].LegendText = "V";
+            chart.Series.Add(_graph);
+            chart.Legends.Add("2");
+            chart.Series[1].LegendText = "без изменения p";
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            double m = 104, D = 0.2, v0 = 1800, p, p0 = 1.2, Cd = 0.2, g = 9.81,
+                A = Math.PI*Math.Pow(D, 2)/4, k = 0.5*p0*Cd*A,
+                x, y, vx, vy, vxy, angle, angleL = 0, angleLX, maxL = 0, maxX;
+            for (int i = 30; i <= 50; i++)
+            {
+                angle = i * Math.PI / 180;
+
+                vx = v0 * Math.Cos(angle);
+                vy = v0 * Math.Sin(angle);
+                maxX = 0; angleLX = 0;
+                for (x = 0, y = 0; y >= 0;)
+                {
+                    if (i % 5 == 0) _graph.Points.AddXY(x / 1000, y / 500);
+                    vxy = -k * Math.Sqrt(Math.Pow(vx, 2) + Math.Pow(vy, 2)) / m;
+                    vx += vxy * vx * _step;
+                    vy += (-g + vxy * vy) * _step;
+                    x += vx * _step;
+                    y += vy * _step;
+                    if (maxX < x)
+                    {
+                        maxX = x;
+                        angleLX = i;
+                    }
+                }
+                if (maxL < maxX)
+                {
+                    maxL = maxX;
+                    angleL = angleLX;
+                }
+            }
+            textBox1.Text = angleL.ToString();
+            label2.Text = Math.Round(maxL/1000, 2).ToString();
+
+            maxL = 0; angleL = 0;
+            for (int i = 30; i <= 50; i++)
+            {
+                angle = i * Math.PI / 180;
+
+                vx = v0 * Math.Cos(angle);
+                vy = v0 * Math.Sin(angle);
+                maxX = 0; angleLX = 0;
+                for (x = 0, y = 0; y >= 0;)
+                {
+                    p = p0 * Math.Exp(-y / 80000);
+                    k = 0.5 * p * Cd * A;
+                    if (i % 5 == 0) _graph2.Points.AddXY(x / 1000, y / 500);
+                    vxy = -k * Math.Sqrt(Math.Pow(vx, 2) + Math.Pow(vy, 2)) / m;
+                    vx += vxy * vx * _step;
+                    vy += (-g + vxy * vy) * _step;
+                    x += vx * _step;
+                    y += vy * _step;
+                    if (maxX < x)
+                    {
+                        maxX = x;
+                        angleLX = i;
+                    }
+                }
+                if (maxL < maxX)
+                {
+                    maxL = maxX;
+                    angleL = angleLX;
+                }
+            }
+            textBox2.Text = angleL.ToString();
+            label4.Text = Math.Round(maxL/1000, 2).ToString();
+        }
+
         private void btnScale_Click(object sender, EventArgs e)
         {
             chart.Visible = false;

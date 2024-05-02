@@ -25,8 +25,8 @@ namespace Calculator
 
         private double _XMin = 0;
         private double _XMax = 10;
-        private double _YMin = -50;
-        private double _YMax = 50;
+        private double _YMin = -20;
+        private double _YMax = 110;
 
         private void AddComponents()
         {
